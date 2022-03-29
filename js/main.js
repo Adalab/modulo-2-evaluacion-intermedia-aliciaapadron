@@ -81,11 +81,17 @@ function handleResertButton(event) {
     howMuchMoney.value = '';
     initialNumber = 50;
     totalMoney.innerHTML = `Saldo: ${initialNumber}`;
+    message.innerHTML = '';
+    whoWins.innerHTML = '';
   }
 }
 
 function handleClickButton(event) {
   event.preventDefault();
+  if (selectNumber.value == '' || howMuchMoney.value == '') {
+    alert('Debes rellenar los campos');
+    return;
+  }
   let coin = totalMoney.innerHTML.split(' ');
 
   if (canPlay(howMuchMoney.value, coin[1])) {
