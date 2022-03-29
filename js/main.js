@@ -1,60 +1,62 @@
 'use strict';
-const select = document.querySelector('.js_select');
-const button = document.querySelector('.js_button');
+const selectNumber = document.querySelector('.js_selectNumber');
+const playButton = document.querySelector('.js_playButton');
+const howMuchMoney = document.querySelector('.js_howMoney');
 const message = document.querySelector('.js_message');
-const amountOfMoney = document.querySelector('.js_input');
-const money = document.querySelector('.js_money');
-const balance = document.querySelector('.js_balance');
-const restarButton = document.querySelector('.js_restarButton');
+const totalMoney = document.querySelector('.js_totalMoney');
 
-//selecciono el número que quiero apostar y le doy a jugar
-//click en jugar genera un número aleatorio
-//si el número aleatorio es igual al seleccionado mensaje en texto "Has ganado el doble de lo apostado . :)"
-//sino "Has perdido lo apostado . :("
-
+//el saldo debe estar por defecto en 50. El valor del saldo debe ser 50 al iniciar el juego
+//se debe ir actualizando
+const initialNumber = 50;
+totalMoney.innerHTML = `Saldo: ${initialNumber}`;
+//generar un número aleatorio del 1 al 6
+//comparar el número con el seleccionado
+//si coincide pintar Has ganado el doble de lo apostado :D
+//sino Has perdido lo apostado :(
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
+//si pierdo restará lo apostado
+//si gano sumará al saldo total
+function resultPossitive() {
+  let totalNumber = parseInt(initialNumber) + parseInt(howMuchMoney.value) * 2;
 
-//lo que yo escriba en amountOfMoney cuando le de a jugar
-//si el número aleatorio es igual al que he elegido, gano y si gano muliplique *2 el amountOfMoney
-//si pierdo el money = a 0
+  totalMoney.innerHTML = `Saldo: ${totalNumber}`;
+}
+function resultNegative() {
+  let totalNumber = parseInt(initialNumber) - parseInt(howMuchMoney.value);
 
-function editDom(text, num) {
+  totalMoney.innerHTML = `Saldo: ${totalNumber}`;
+}
+function giveText(text) {
   message.innerHTML = text;
-  balance.value = num;
 }
 
 function randomNumber() {
   let giveMeNumber = getRandomNumber(6);
-  if (giveMeNumber == select.value) {
-    let total = parseInt(balance.value) + parseInt(amountOfMoney.value * 2);
-    editDom('Has ganado el doble de lo apostado :).', total);
+  if (giveMeNumber == selectNumber.value) {
+    giveText('Has ganado el doble de lo apostado :D');
+    resultPossitive();
   } else {
-    let total = 0;
-    editDom('Has perdido lo apostado :(.', total);
+    giveText('Has perdido lo apostado :(');
+    resultNegative();
   }
 }
-
-function winnerOrNot() {
-  randomNumber();
-}
-//si el balance a 200 el botón jugar cambiará por el botón reiniciar el juego
-
-function max200() {
-  if (balance.value == 200) {
-    button.classList.add('hidden');
-    restarButton.classList.remove('hidden');
-  }
-}
-
-//Cuando finalice el juego, muestra quién ha ganado la partida: la computadora o la usuaria.
-//
 
 function handleClickButton(event) {
   event.preventDefault();
-  winnerOrNot();
-  max200();
+  randomNumber();
 }
 
-button.addEventListener('click', handleClickButton);
+playButton.addEventListener('click', handleClickButton);
+
+//el juego finaliza cuando totalMoney es = 200 // no se puede apostar +de 100
+
+// //solo se puede apostar si totalMoney <= howMuchMoney
+// //si totalMoney es <=200
+// function maxMoney() {
+//   if (howMuchMoney.value < totalMoney) {
+//     totalMoney.innerHTML = 'No tienes suficiente dinero, inténtalo de nuevo';
+//     playButton.innerHTML = 'Reiniciar Juego';
+//   }
+// }
