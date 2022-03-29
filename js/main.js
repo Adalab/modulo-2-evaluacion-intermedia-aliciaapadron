@@ -42,11 +42,14 @@ function winnerOrNot() {
 //si el balance a 200 el botón jugar cambiará por el botón reiniciar el juego
 
 function max200() {
-  if ((balance.value = 200)) {
+  if (balance.value == 200) {
     button.classList.add('hidden');
     restarButton.classList.remove('hidden');
   }
 }
+
+//Cuando finalice el juego, muestra quién ha ganado la partida: la computadora o la usuaria.
+//
 
 function handleClickButton(event) {
   event.preventDefault();
