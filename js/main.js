@@ -5,6 +5,7 @@ const message = document.querySelector('.js_message');
 const amountOfMoney = document.querySelector('.js_input');
 const money = document.querySelector('.js_money');
 const balance = document.querySelector('.js_balance');
+const restarButton = document.querySelector('.js_restarButton');
 
 //selecciono el número que quiero apostar y le doy a jugar
 //click en jugar genera un número aleatorio
@@ -24,7 +25,7 @@ function editDom(text, num) {
   balance.value = num;
 }
 
-function winnerOrNot() {
+function randomNumber() {
   let giveMeNumber = getRandomNumber(6);
   if (giveMeNumber == select.value) {
     let total = parseInt(balance.value) + parseInt(amountOfMoney.value * 2);
@@ -35,9 +36,22 @@ function winnerOrNot() {
   }
 }
 
+function winnerOrNot() {
+  randomNumber();
+}
+//si el balance a 200 el botón jugar cambiará por el botón reiniciar el juego
+
+function max200() {
+  if ((balance.value = 200)) {
+    button.classList.add('hidden');
+    restarButton.classList.remove('hidden');
+  }
+}
+
 function handleClickButton(event) {
   event.preventDefault();
   winnerOrNot();
+  max200();
 }
 
 button.addEventListener('click', handleClickButton);
