@@ -39,12 +39,12 @@ function giveSecondText(textSecond) {
 function randomNumber() {
   let giveMeNumber = getRandomNumber(6);
   if (giveMeNumber == selectNumber.value) {
-    giveText('Has ganado el doble de lo apostado :D');
-    giveSecondText('Felicidades, ¡has haganado!');
+    giveText('Has ganado el doble de lo apostado 🤩');
+    giveSecondText('Felicidades, ¡has haganado!🤑');
     resultPossitive();
   } else {
-    giveText('Has perdido lo apostado :(');
-    giveSecondText('Ups...te ha ganado una máquina');
+    giveText('Has perdido lo apostado 😭');
+    giveSecondText('Ups...te ha ganado una máquina 🎰');
     resultNegative();
   }
 }
